@@ -25,7 +25,6 @@ export default function ListaUsuarios() {
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.userId}>{item.userId}</Text>
             <Text style={styles.title}>{item.title}</Text>
           </View>
         )}

@@ -1,24 +1,29 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from '../screens/HomeScreen';
+import ListaScreen from '../screens/ListaScreen';
+import LoginScreen from '../screens/LoginScreen';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+const Stack = createNativeStackNavigator();
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
+export default function Layout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{ title: 'Início' }} 
+      />
+      <Stack.Screen 
+        name="Lista" 
+        component={ListaScreen} 
+        options={{ title: 'Usuários' }} 
+      />
+      <Stack.Screen
+        name="Login" 
+        component={LoginScreen} 
+        options={{ title: 'Login' }} 
+      />
+    </Stack.Navigator>
   );
 }
